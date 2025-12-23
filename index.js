@@ -4,7 +4,7 @@ const { Pool } = require("pg");
 const app = express();
 app.use(express.json());
 
-// KONEKSI DATABASE POSTGRES RAILWAY
+// KONEKSI POSTGRES RAILWAY
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
@@ -18,10 +18,10 @@ app.get("/", (req, res) => {
 // ================= GET ALL =================
 app.get("/pulsa", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM pulsa ORDER BY id DESC");
+    const result = await pool.query("SELECT * FROM pulsa");
     res.json(result.rows);
   } catch (err) {
-    console.error("GET /pulsa error:", err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -33,7 +33,7 @@ app.get("/pulsa/:id", async (req, res) => {
     const result = await pool.query("SELECT * FROM pulsa WHERE id = $1", [id]);
     res.json(result.rows[0]);
   } catch (err) {
-    console.error("GET /pulsa/:id error:", err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -52,7 +52,7 @@ app.post("/pulsa", async (req, res) => {
 
     res.json({ message: "Data pulsa berhasil ditambahkan" });
   } catch (err) {
-    console.error("POST /pulsa error:", err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -77,7 +77,7 @@ app.put("/pulsa/:id", async (req, res) => {
 
     res.json({ message: "Data pulsa berhasil diupdate" });
   } catch (err) {
-    console.error("PUT /pulsa error:", err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -91,7 +91,7 @@ app.delete("/pulsa/:id", async (req, res) => {
 
     res.json({ message: "Data pulsa berhasil dihapus" });
   } catch (err) {
-    console.error("DELETE /pulsa error:", err);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
