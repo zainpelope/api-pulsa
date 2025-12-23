@@ -12,7 +12,7 @@ const pool = new Pool({
 
 // ================= ROOT =================
 app.get("/", (req, res) => {
-  res.json({ message: "API Pulsa Railway jalan 🚀" });
+  res.json({ message: "API Pulsa Railway jalan 🚀 Alhamdulillah :)" });
 });
 
 // ================= GET ALL =================
